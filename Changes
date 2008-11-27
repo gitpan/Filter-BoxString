@@ -1,5 +1,9 @@
 Revision history for Perl extension Filter::BoxString.
 
+0.02 Thu Nov 27 10:30:00 2008
+    - fixed up the POD a little
+    - non default text in the README
+
 0.01  Wed Nov 26 23:01:00 2008
 	- original version; created by h2xs 1.23 with options
 		-XA -n Filter::BoxString

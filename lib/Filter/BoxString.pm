@@ -5,7 +5,7 @@ use strict;
 use warnings FATAL => 'all';
 use Filter::Simple;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my $delimiter = 'TEXTBOX';
 
@@ -77,6 +77,7 @@ Filter::BoxString - Describe your multiline strings as text boxes.
 
 	use Filter::BoxString;
 
+       # Trailing whitespace preserved
        my $list = +---------------+
                   | 1. Milk       |
                   | 2. Eggs       |
@@ -100,13 +101,6 @@ Filter::BoxString - Describe your multiline strings as text boxes.
                   |</shopping_list>
                   +---------------------------------------+;
 
-    my $noodles = +-----------------------+
-                  | Ramen
-                  | Shirataki
-                  | Soba
-                  | Somen
-                  | Udon
-                  +;
 
     my $beatles = +
                   | Love Me Do
@@ -137,10 +131,6 @@ Filter::BoxString - Describe your multiline strings as text boxes.
                   | +!@#\$%^&*()_|"?><{}>~=-\'/.,[]
                   | +=!@#$%^&*()_-|\"':;?/>.<,}]{[><~`
                   +-----------------------------------+;
-
-   my $japanese = +--------------------------------------+
-                  | 私のホバークラフトうなぎが満載です。
-                  +--------------------------------------+;
 
  my $nested_box = +-------------+
                   |             |
