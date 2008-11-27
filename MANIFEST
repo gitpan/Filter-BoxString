@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/Filter-BoxString.t
+lib/Filter/BoxString.pm

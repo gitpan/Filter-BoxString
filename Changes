@@ -1,0 +1,6 @@
+Revision history for Perl extension Filter::BoxString.
+
+0.01  Wed Nov 26 23:01:00 2008
+	- original version; created by h2xs 1.23 with options
+		-XA -n Filter::BoxString
+
