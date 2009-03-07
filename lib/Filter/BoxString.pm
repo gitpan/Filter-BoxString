@@ -1,3 +1,24 @@
+#=================================================================== -*-perl-*-
+#
+# Filter::BoxString
+#
+# DESCRIPTION
+#
+#   Adds support for describing multiline strings as boxes delimited by
+#   the '-', '+', and '|' characters in an ASCII art style box.
+#
+# AUTHOR
+#   Dylan Doxey <dylan.doxey@gmail.com>
+#
+# COPYRIGHT
+#   Copyright (C) 2009 Dylan Doxey
+#
+#   This library is free software; you can redistribute it and/or modify it
+#   under the same terms as Perl itself, either Perl version 5.8.0 or, at
+#   your option, any later version of Perl 5 you may have available.
+#
+#==============================================================================
+
 package Filter::BoxString;
 
 use 5.008008;
@@ -5,14 +26,12 @@ use strict;
 use warnings FATAL => 'all';
 use Filter::Simple;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
-my $delimiter = 'TEXTBOX';
+my $delimiter = 'BOXSTRING';
 
 my $BoxString_Regex = qr{
-    ( (?: my \s+ )? \$\w+ \s* = \s* [+] (?: -*  [+] )?     \n
-                            (?: \s+ [|]     .*? [|]?       \n )+
-                                \s+ [+] (?: -*  [+] )? ; ) \n
+    ( (?: my \s+ )? \$\w+ \s* = \s* [+] (?: .*? ) + [+]; )
 }msx;
 
 FILTER_ONLY
@@ -37,11 +56,16 @@ executable => sub {
 
         my ($here_doc) = $boxstring =~ m/( (?: my \s+ )? \$[\w\{\}\[\]]+ \s* = ) \s* [+]/msx;
 
-        $here_doc .= " <<$delimiter;\n";
+        $here_doc .= qq{ <<"$delimiter";\n};
 
         my @lines = split /\n\s*[|]/, $boxstring;
+
         shift @lines;
-        $lines[$#lines] =~ s/(?: [^|]+ [+] -* )? [+] ; \z//msx;
+        
+        # strip the trailing +---+;
+        if ( @lines ) {
+            $lines[$#lines] =~ s{ [+-;]+ \z}{}msxg;
+        }
 
         for my $line (@lines) {
 
@@ -58,7 +82,7 @@ executable => sub {
 
         $here_doc .= $delimiter;
 
-        # Swap out the box-string with the old school here-doc.
+        # Swap out the box-string with the here-doc.
         s/$boxstring_regex/$here_doc/;
     }
 };
@@ -75,7 +99,7 @@ Filter::BoxString - Describe your multiline strings as text boxes.
 
 =head1 SYNOPSIS
 
-	use Filter::BoxString;
+    use Filter::BoxString;
 
        # Trailing whitespace preserved
        my $list = +---------------+
@@ -132,14 +156,6 @@ Filter::BoxString - Describe your multiline strings as text boxes.
                   | +=!@#$%^&*()_-|\"':;?/>.<,}]{[><~`
                   +-----------------------------------+;
 
- my $nested_box = +-------------+
-                  |             |
-                  | \$a = +---+  |
-                  |      | z |  |
-                  |      +---+; |
-                  |             |
-                  +-------------+;
-
 
 =head1 DESCRIPTION
 
@@ -148,18 +164,32 @@ Underneath it all, this filter transforms your box-string to the equivilent here
 
 The purpose is purely aesthetic. Please enjoy.
 
-
 =head1 BUGS AND LIMITATIONS
 
-The methodology is based on creating a regular expression out of your box-string and then using that regex to swap in the equivilent here-doc code.
-Perhaps you can devise some box-string content which can break my filter.
-Please try it, and let me know if you succeed.
+The methodology is to capture your boxstring by matching something like " = + ... +; " 
+which will break if your boxstring contains the sequence '+;'. 
 
+=head1 TODO
+
+Make the delimiters as flexible as perl. 
+
+Perhaps:
+
+ my $s = qq---------------+
+          | "hello world" |
+          +---------------qq;
+
+ my $s = "---------------+
+         | hello world+; |
+         +---------------";
+
+ my $s = '------------------+
+         | qq{hello world}; |
+         +------------------';
 
 =head1 AUTHOR
 
 Dylan Doxey E<lt>dylan.doxey@gmail.comE<gt>
-
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -170,3 +200,4 @@ it under the same terms as Perl itself, either Perl version 5.8.8 or,
 at your option, any later version of Perl 5 you may have available.
 
 =cut
+

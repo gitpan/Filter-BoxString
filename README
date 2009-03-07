@@ -1,17 +1,12 @@
-Filter-BoxString version 0.02
+Filter-BoxString version 0.03
 =============================
-
-Use Filter::BoxString to describe multiline strings with ASCII art
-style boxes using '+', '-', and '|' characters.
 
 INSTALLATION
 
-To install this module type the following:
+The best way to install this module is via the cpan
+command line tool.
 
-   perl Makefile.PL
-   make
-   make test
-   make install
+cpan Filter::BoxString
 
 DEPENDENCIES
 
@@ -21,9 +16,7 @@ Filter::Simple
 
 COPYRIGHT AND LICENCE
 
-Put the correct copyright and licence information here.
-
-Copyright (C) 2008 by Dylan Doxey
+Copyright (C) 2009 by Dylan Doxey
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.8 or,

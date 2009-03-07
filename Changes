@@ -1,10 +1,12 @@
 Revision history for Perl extension Filter::BoxString.
 
-0.02 Thu Nov 27 10:30:00 2008
-    - fixed up the POD a little
-    - non default text in the README
+0.03  Sat Mar 07 10:11:12 2009
+    - restored t/Filter-BoxString.t
+    - fixed dropping of last line bug
+    - double quoted heredoc delimiters
+    - dropped support for nested boxstrings
 
-0.01  Wed Nov 26 23:01:00 2008
+0.01  Mon Nov 24 18:31:25 2008
 	- original version; created by h2xs 1.23 with options
 		-XA -n Filter::BoxString
 
