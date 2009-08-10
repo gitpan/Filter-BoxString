@@ -1,18 +1,22 @@
-Filter-BoxString version 0.03
+Filter-BoxString version 0.04
 =============================
 
 INSTALLATION
 
-The best way to install this module is via the cpan
-command line tool.
+To install this module type the following:
 
-cpan Filter::BoxString
+   perl Makefile.PL
+   make
+   make test
+   make install
 
 DEPENDENCIES
 
 This module requires these other modules and libraries:
 
-Filter::Simple
+    Filter::Simple
+    Test::More
+    Text::Balanced 2.0.0
 
 COPYRIGHT AND LICENCE
 

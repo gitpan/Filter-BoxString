@@ -5,7 +5,11 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'Filter::BoxString',
     VERSION_FROM      => 'lib/Filter/BoxString.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => {
+        'Filter::Simple' => 0,
+        'Test::More'     => 0, 
+        'Text::Balanced' => '2.0.0', 
+    }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Filter/BoxString.pm', # retrieve abstract from module
        AUTHOR         => 'Dylan Doxey <dylan.doxey@gmail.com>') : ()),

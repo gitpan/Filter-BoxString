@@ -1,32 +1,11 @@
-#=================================================================== -*-perl-*-
-#
-# Filter::BoxString
-#
-# DESCRIPTION
-#
-#   Adds support for describing multiline strings as boxes delimited by
-#   the '-', '+', and '|' characters in an ASCII art style box.
-#
-# AUTHOR
-#   Dylan Doxey <dylan.doxey@gmail.com>
-#
-# COPYRIGHT
-#   Copyright (C) 2009 Dylan Doxey
-#
-#   This library is free software; you can redistribute it and/or modify it
-#   under the same terms as Perl itself, either Perl version 5.8.0 or, at
-#   your option, any later version of Perl 5 you may have available.
-#
-#==============================================================================
-
 package Filter::BoxString;
+
+our $VERSION = '0.04';
 
 use 5.008008;
 use strict;
 use warnings FATAL => 'all';
 use Filter::Simple;
-
-our $VERSION = '0.03';
 
 my $delimiter = 'BOXSTRING';
 
